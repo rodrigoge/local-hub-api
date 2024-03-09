@@ -6,17 +6,21 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>br.com.api</groupId>
 	<artifactId>servicehub</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>servicehub</name>
-	<description>An API responsible for allowing scheduling of various services, such as restaurant reservations, medical appointments and others.</description>
+	<version>1.0.0</version>
+	<name>ServiceHub</name>
+	<description>
+		An API responsible for allowing scheduling of various services,
+		such as restaurant reservations, medical appointments and others.
+	</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+		<!-- Spring Boot dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -30,15 +34,21 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Others dependencies -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -50,13 +60,7 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -73,5 +77,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

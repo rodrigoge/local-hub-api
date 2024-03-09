@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServicehubApplication {
+public class ServiceHubApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ServicehubApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ServiceHubApplication.class, args);
+    }
 
 }
