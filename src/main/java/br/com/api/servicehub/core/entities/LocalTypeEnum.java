@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum ServiceTypeEnum {
+public enum LocalTypeEnum {
 
     FOOD,
     HOSPITAL,

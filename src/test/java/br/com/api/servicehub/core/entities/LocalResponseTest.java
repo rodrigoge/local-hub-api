@@ -7,20 +7,20 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class ServiceTOTest {
+public class LocalResponseTest {
 
     @Test
     void shouldReturnsAnService() {
-        var service = new ServiceTO(ServiceTypeEnum.FOOD, StateEnum.MINAS_GERAIS, "Paraisopolis");
+        var service = new LocalResponse(LocalTypeEnum.FOOD, StateEnum.MINAS_GERAIS, "Paraisopolis");
         assertThat(service).isNotNull();
-        assertThat(service.type()).isNotNull().isEqualTo(ServiceTypeEnum.FOOD);
+        assertThat(service.type()).isNotNull().isEqualTo(LocalTypeEnum.FOOD);
         assertThat(service.state()).isNotNull().isEqualTo(StateEnum.MINAS_GERAIS);
         assertThat(service.city()).isNotNull().isEqualTo("Paraisopolis");
     }
 
     @Test
     void shouldReturnsAnEmptyService() {
-        var service = new ServiceTO(null, null, null);
+        var service = new LocalResponse(null, null, null);
         assertThat(service).isNotNull();
         assertThat(service.type()).isNull();
         assertThat(service.state()).isNull();
