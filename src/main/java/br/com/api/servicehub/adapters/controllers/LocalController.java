@@ -24,14 +24,16 @@ public class LocalController {
     private LocalService localService;
 
     @GetMapping
-    public ResponseEntity<List<LocalResponse>> getLocations(@RequestParam(required = false) LocalTypeEnum type,
+    public ResponseEntity<List<LocalResponse>> getLocations(@RequestParam(required = false) String name,
+                                                            @RequestParam(required = false) String address,
+                                                            @RequestParam(required = false) LocalTypeEnum type,
                                                             @RequestParam(required = false) StateEnum status,
                                                             @RequestParam(required = false) String city,
                                                             @RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "25") int limit,
                                                             @RequestParam(defaultValue = "id") String column,
                                                             @RequestParam(defaultValue = "DESC") OrderEnum order) {
-        var request = new LocalRequest(type, status, city, page, limit, column, order);
+        var request = new LocalRequest(name, address, type, status, city, page, limit, column, order);
         var response = localService.getLocations(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

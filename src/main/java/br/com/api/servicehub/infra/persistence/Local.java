@@ -22,6 +22,12 @@ public class Local {
     private UUID id;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
     private LocalTypeEnum type;
 
     @Column(nullable = false)

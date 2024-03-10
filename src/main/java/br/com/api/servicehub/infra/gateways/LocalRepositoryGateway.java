@@ -39,6 +39,12 @@ public class LocalRepositoryGateway implements LocalGateway {
     private List<Predicate> buildPredicates(LocalRequest request, CriteriaBuilder criteriaBuilder, Root<Local> root) {
         List<Predicate> predicates = new ArrayList<>();
         if (Objects.nonNull(request.type())) {
+            predicates.add(criteriaBuilder.equal(root.get("name"), "%" + request.name().toLowerCase() + "%"));
+        }
+        if (Objects.nonNull(request.address())) {
+            predicates.add(criteriaBuilder.equal(root.get("address"), "%" + request.address().toLowerCase() + "%"));
+        }
+        if (Objects.nonNull(request.type())) {
             predicates.add(criteriaBuilder.equal(root.get("type"), request.type()));
         }
         if (Objects.nonNull(request.state())) {

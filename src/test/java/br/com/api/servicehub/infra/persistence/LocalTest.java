@@ -18,6 +18,8 @@ public class LocalTest {
         var service = new Local();
         var serviceId = UUID.fromString("bcc4f117-94f3-4c75-a24d-18ce117ab5e7");
         service.setId(serviceId);
+        service.setName("Store testing");
+        service.setAddress("Avenue Text, number 100");
         service.setType(LocalTypeEnum.FOOD);
         service.setState(StateEnum.MINAS_GERAIS);
         service.setCity("Paraisopolis");
@@ -33,6 +35,8 @@ public class LocalTest {
         var service = new Local();
         assertThat(service).isNotNull();
         assertThat(service.getId()).isNull();
+        assertThat(service.getName()).isNull();
+        assertThat(service.getAddress()).isNull();
         assertThat(service.getType()).isNull();
         assertThat(service.getState()).isNull();
         assertThat(service.getCity()).isNull();
