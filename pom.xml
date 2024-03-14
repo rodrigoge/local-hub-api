@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>br.com.api</groupId>
-	<artifactId>servicehub</artifactId>
+	<artifactId>local-hub-api</artifactId>
 	<version>1.0.0</version>
-	<name>ServiceHub</name>
+	<name>LocalHubApi</name>
 	<description>
 		An API responsible for allowing scheduling of various services,
 		such as restaurant reservations, medical appointments and others.
