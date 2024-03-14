@@ -1,48 +1,55 @@
 package br.com.api.servicehub.adapters;
 
-import br.com.api.servicehub.core.entities.LocalTypeEnum;
-import br.com.api.servicehub.core.entities.StateEnum;
-import br.com.api.servicehub.infra.persistence.Local;
+import br.com.api.servicehub.app.LocalService;
+import br.com.api.servicehub.core.entities.LocalRequest;
+import br.com.api.servicehub.mocks.MockBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class LocalControllerIT {
 
-    @LocalServerPort
-    private int port;
+    @MockBean
+    private LocalService localService;
 
     @Autowired
-    private TestRestTemplate testRestTemplate;
+    private MockMvc mockMvc;
 
     @Test
-    void shouldGetServices() {
-        var service = new Local();
-        var serviceId = UUID.fromString("bcc4f117-94f3-4c75-a24d-18ce117ab5e7");
-        service.setId(serviceId);
-        service.setType(LocalTypeEnum.FOOD);
-        service.setState(StateEnum.MINAS_GERAIS);
-        service.setCity("Paraisopolis");
-        var services = List.of(service);
-        var serviceResponse = testRestTemplate.getForEntity(
-                "http://localhost:" + port + "/services",
-                Local[].class
-        );
-        assertEquals(HttpStatus.OK, serviceResponse.getStatusCode());
-        var actualServices = List.of(Objects.requireNonNull(serviceResponse.getBody()));
-        assertEquals(services.size(), actualServices.size());
+    void should_GetLocations_When_ValidInput() throws Exception {
+        var mockLocalResponses = MockBuilder.buildMockLocalResponses();
+        Mockito.when(localService.getLocations(any(LocalRequest.class))).thenReturn(mockLocalResponses);
+        var mockLocalRequest = MockBuilder.buildMockLocalRequestByAscending();
+        mockMvc.perform(get("/services")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("name", "Company Name S.A")
+                        .param("city", "123 Main Street, Cityville")
+                        .param("page", "0")
+                        .param("limit", "25")
+                        .param("column", "id")
+                        .param("order", "DESC"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].name").value(mockLocalRequest.name()))
+                .andExpect(jsonPath("$[0].city").value(mockLocalRequest.city()));
     }
 }
