@@ -37,4 +37,16 @@ public class LocalTest {
         assertThat(buildMockEmptyLocal.getState()).isNull();
         assertThat(buildMockEmptyLocal.getCity()).isNull();
     }
+
+    @Test
+    void should_ReturnLocalWithoutConstructor_When_ValidInput() {
+        var buildMockLocal = MockBuilder.buildMockLocalWithoutConstructor();
+        assertThat(buildMockLocal).isNotNull();
+        assertThat(buildMockLocal.getId()).isNotNull().isEqualTo(UUID.fromString("bcc4f117-94f3-4c75-a24d-18ce117ab5e7"));
+        assertThat(buildMockLocal.getName()).isNotNull().isEqualTo("Company Name S.A");
+        assertThat(buildMockLocal.getAddress()).isNotNull().isEqualTo("123 Main Street, Cityville");
+        assertThat(buildMockLocal.getType()).isNotNull().isEqualTo(LocalTypeEnum.FOOD);
+        assertThat(buildMockLocal.getState()).isNotNull().isEqualTo(StateEnum.MINAS_GERAIS);
+        assertThat(buildMockLocal.getCity()).isNotNull().isEqualTo("Belo Horizonte");
+    }
 }

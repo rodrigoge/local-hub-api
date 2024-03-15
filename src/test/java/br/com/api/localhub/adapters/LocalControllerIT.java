@@ -5,7 +5,6 @@ import br.com.api.localhub.core.entities.LocalRequest;
 import br.com.api.localhub.mocks.MockBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -36,7 +36,7 @@ public class LocalControllerIT {
     @Test
     void should_GetLocations_When_ValidInput() throws Exception {
         var mockLocalResponses = MockBuilder.buildMockLocalResponses();
-        Mockito.when(localService.getLocals(any(LocalRequest.class))).thenReturn(mockLocalResponses);
+        when(localService.getLocals(any(LocalRequest.class))).thenReturn(mockLocalResponses);
         var mockLocalRequest = MockBuilder.buildMockLocalRequestByAscending();
         mockMvc.perform(get("/locals")
                         .contentType(MediaType.APPLICATION_JSON)

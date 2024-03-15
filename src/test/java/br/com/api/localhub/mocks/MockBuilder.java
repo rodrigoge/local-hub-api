@@ -97,6 +97,18 @@ public class MockBuilder {
         return new Local();
     }
 
+    public static Local buildMockLocalWithoutConstructor() {
+        var mockLocalUUID = UUID.fromString("bcc4f117-94f3-4c75-a24d-18ce117ab5e7");
+        var mockLocal = new Local();
+        mockLocal.setId(mockLocalUUID);
+        mockLocal.setName("Company Name S.A");
+        mockLocal.setAddress("123 Main Street, Cityville");
+        mockLocal.setType(LocalTypeEnum.FOOD);
+        mockLocal.setState(StateEnum.MINAS_GERAIS);
+        mockLocal.setCity("Belo Horizonte");
+        return mockLocal;
+    }
+
     public static LocalDateTime buildMockLocalDateTime() {
         return LocalDateTime.of(2024, 1, 1, 1, 1);
     }
