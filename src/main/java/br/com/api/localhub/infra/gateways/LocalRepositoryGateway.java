@@ -55,23 +55,23 @@ public class LocalRepositoryGateway implements LocalGateway {
         List<Predicate> predicates = new ArrayList<>();
         log.info("Validating if there is a name in the request.");
         if (Objects.nonNull(request.name())) {
-            predicates.add(criteriaBuilder.like(root.get("name"), "%" + request.name().toLowerCase() + "%"));
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + request.name().toLowerCase() + "%"));
         }
         log.info("Validating if there is an address in the request.");
         if (Objects.nonNull(request.address())) {
-            predicates.add(criteriaBuilder.like(root.get("address"), "%" + request.address().toLowerCase() + "%"));
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("address")), "%" + request.address().toLowerCase() + "%"));
         }
         log.info("Validating if there is a type in the request.");
         if (Objects.nonNull(request.type())) {
-            predicates.add(criteriaBuilder.like(root.get("type"), "%" + request.type().toString().toLowerCase() + "%"));
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("type")), "%" + request.type().toString().toLowerCase() + "%"));
         }
         log.info("Validating if there is a state in the request.");
         if (Objects.nonNull(request.state())) {
-            predicates.add(criteriaBuilder.like(root.get("state"), "%" + request.state().toString().toLowerCase() + "%"));
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("state")), "%" + request.state().toString().toLowerCase() + "%"));
         }
         log.info("Validating if there is a city in the request.");
         if (Objects.nonNull(request.city())) {
-            predicates.add(criteriaBuilder.like(root.get("city"), "%" + request.city().toLowerCase() + "%"));
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("city")), "%" + request.city().toLowerCase() + "%"));
         }
         log.info("Finishing building predicates to get locals flow.");
         return predicates;

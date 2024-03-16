@@ -52,6 +52,8 @@ public class LocalRepositoryGatewayTest {
         when(criteriaQuery.from(Local.class)).thenReturn(root);
         when(typedQuery.getResultList()).thenReturn(buildMockLocations);
         when(entityManager.createQuery(criteriaQuery)).thenReturn(typedQuery);
+        when(entityManager.createQuery(criteriaQuery).setFirstResult(0)).thenReturn(typedQuery);
+        when(entityManager.createQuery(criteriaQuery).setMaxResults(25)).thenReturn(typedQuery);
         when(entityManager.createQuery(criteriaQuery).getResultList()).thenReturn(buildMockLocations);
         var buildMockLocationsResponse = localRepositoryGateway.getLocals(buildMockLocalRequest);
         assertEquals(1, buildMockLocationsResponse.size());
@@ -67,6 +69,9 @@ public class LocalRepositoryGatewayTest {
         when(criteriaQuery.from(Local.class)).thenReturn(root);
         when(typedQuery.getResultList()).thenReturn(buildMockLocations);
         when(entityManager.createQuery(criteriaQuery)).thenReturn(typedQuery);
+        when(entityManager.createQuery(criteriaQuery).setFirstResult(0)).thenReturn(typedQuery);
+        when(entityManager.createQuery(criteriaQuery).setMaxResults(25)).thenReturn(typedQuery);
+        when(entityManager.createQuery(criteriaQuery).getResultList()).thenReturn(buildMockLocations);
         when(entityManager.createQuery(criteriaQuery).getResultList()).thenReturn(buildMockLocations);
         var buildMockLocationsResponse = localRepositoryGateway.getLocals(buildMockLocalRequest);
         assertEquals(1, buildMockLocationsResponse.size());
