@@ -39,7 +39,13 @@ public class LocalRepositoryGateway implements LocalGateway {
         log.info("Sorting and ordering query to get locals.");
         sortAndOrderToGetLocals(request, criteriaQuery, criteriaBuilder, root);
         log.info("Getting result list by query to get locals.");
-        var locals = entityManager.createQuery(criteriaQuery).getResultList();
+        var requestLimit = request.limit();
+        var requestOffset = request.page();
+        var locals = entityManager
+                .createQuery(criteriaQuery)
+                .setMaxResults(requestLimit)
+                .setFirstResult(requestOffset)
+                .getResultList();
         log.info("Building locals response to list.");
         return buildLocalsResponse(locals);
     }
@@ -49,19 +55,19 @@ public class LocalRepositoryGateway implements LocalGateway {
         List<Predicate> predicates = new ArrayList<>();
         log.info("Validating if there is a name in the request.");
         if (Objects.nonNull(request.name())) {
-            predicates.add(criteriaBuilder.equal(root.get("name"), "%" + request.name().toLowerCase() + "%"));
+            predicates.add(criteriaBuilder.like(root.get("name"), "%" + request.name().toLowerCase() + "%"));
         }
         log.info("Validating if there is an address in the request.");
         if (Objects.nonNull(request.address())) {
-            predicates.add(criteriaBuilder.equal(root.get("address"), "%" + request.address().toLowerCase() + "%"));
+            predicates.add(criteriaBuilder.like(root.get("address"), "%" + request.address().toLowerCase() + "%"));
         }
         log.info("Validating if there is a type in the request.");
         if (Objects.nonNull(request.type())) {
-            predicates.add(criteriaBuilder.equal(root.get("type"), request.type()));
+            predicates.add(criteriaBuilder.like(root.get("type"), "%" + request.type().toString().toLowerCase() + "%"));
         }
         log.info("Validating if there is a state in the request.");
         if (Objects.nonNull(request.state())) {
-            predicates.add(criteriaBuilder.equal(root.get("state"), request.state()));
+            predicates.add(criteriaBuilder.like(root.get("state"), "%" + request.state().toString().toLowerCase() + "%"));
         }
         log.info("Validating if there is a city in the request.");
         if (Objects.nonNull(request.city())) {

@@ -4,6 +4,8 @@ import br.com.api.localhub.core.entities.LocalTypeEnum;
 import br.com.api.localhub.core.entities.StateEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,9 +34,11 @@ public class Local {
     private String address;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private LocalTypeEnum type;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private StateEnum state;
 
     @Column(nullable = false)

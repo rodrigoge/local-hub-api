@@ -6,6 +6,7 @@ import br.com.api.localhub.core.entities.LocalTypeEnum;
 import br.com.api.localhub.core.entities.OrderEnum;
 import br.com.api.localhub.core.entities.StateEnum;
 import br.com.api.localhub.core.exceptions.FlowException;
+import br.com.api.localhub.infra.gateways.LocalRepositoryGateway;
 import br.com.api.localhub.infra.persistence.Local;
 import org.springframework.http.HttpStatus;
 
@@ -120,5 +121,9 @@ public class MockBuilder {
                 mockLocalDateTime,
                 "Error message encountered while executing this method test."
         );
+    }
+
+    public static LocalRepositoryGateway buildMockLocalRepositoryGateway() {
+        return new LocalRepositoryGateway();
     }
 }
