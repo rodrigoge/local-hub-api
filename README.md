@@ -7,12 +7,28 @@ An API responsible for allowing scheduling of various services, such as restaura
 - SOLID principles
 - OpenAPI Documentation
 
-For more information, access swagger documentation in this [link](https://github.com/rodrigoge/local-hub-api/blob/main/src/main/openapi/openapi.yaml).
-
 ### 🧰 Stack used
 - Java 21
 - Spring Boot
 - PostgreSQL
+
+### 📚 API Documentation
+#### Get all locals
+```http
+  GET /locals
+```
+
+| Parameter   | Type       | Description                           |
+| :---------- | :--------- | :---------------------------------- |
+| `page` | `integer` | **Required**. Number of page  |
+| `limit` | `integer` | **Required**. Limit of locals per page  |
+| `column` | `string` | **Required**. Column name of locals by ordering  |
+| `order` | `string` | **Required**. Order type of locals  |
+| `name` | `string` | Name of a local  |
+| `address` | `string` | Address of a local  |
+| `type` | `string` | Types of locals  |
+| `state` | `string` | Brazilian states of locals  |
+| `city` | `string` | Brazilian cities of locals  |
 
 ### 👋 Author
 - [@rodrigoge](https://www.github.com/rodrigoge)

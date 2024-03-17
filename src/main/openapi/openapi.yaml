@@ -73,7 +73,7 @@ components:
       schema:
         $ref: '#/components/schemas/Address'
     Type:
-      name: LocalTypeEnum
+      name: type
       in: query
       schema:
         $ref: '#/components/schemas/LocalTypeEnum'
