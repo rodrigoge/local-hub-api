@@ -4,6 +4,8 @@ import br.com.api.localhub.mocks.MockBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openapitools.model.LocalTypeEnum;
+import org.openapitools.model.StateEnum;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,21 +16,21 @@ public class LocalResponseTest {
     void should_ReturnLocalResponse_When_ValidInput() {
         var buildMockLocalResponse = MockBuilder.buildMockLocalResponse();
         assertThat(buildMockLocalResponse).isNotNull();
-        assertThat(buildMockLocalResponse.name()).isNotNull().isEqualTo("Company Name S.A");
-        assertThat(buildMockLocalResponse.address()).isNotNull().isEqualTo("123 Main Street, Cityville");
-        assertThat(buildMockLocalResponse.type()).isNotNull().isEqualTo(LocalTypeEnum.FOOD);
-        assertThat(buildMockLocalResponse.state()).isNotNull().isEqualTo(StateEnum.MINAS_GERAIS);
-        assertThat(buildMockLocalResponse.city()).isNotNull().isEqualTo("Belo Horizonte");
+        assertThat(buildMockLocalResponse.getName()).isNotNull().isEqualTo("Company Name S.A");
+        assertThat(buildMockLocalResponse.getAddress()).isNotNull().isEqualTo("123 Main Street, Cityville");
+        assertThat(buildMockLocalResponse.getType()).isNotNull().isEqualTo(LocalTypeEnum.FOOD);
+        assertThat(buildMockLocalResponse.getState()).isNotNull().isEqualTo(StateEnum.MINAS_GERAIS);
+        assertThat(buildMockLocalResponse.getCity()).isNotNull().isEqualTo("Belo Horizonte");
     }
 
     @Test
     void should_ReturnEmptyLocalResponse_When_WithoutConstructor() {
         var buildMockEmptyLocalResponse = MockBuilder.buildMockEmptyLocalResponse();
         assertThat(buildMockEmptyLocalResponse).isNotNull();
-        assertThat(buildMockEmptyLocalResponse.name()).isNull();
-        assertThat(buildMockEmptyLocalResponse.address()).isNull();
-        assertThat(buildMockEmptyLocalResponse.type()).isNull();
-        assertThat(buildMockEmptyLocalResponse.state()).isNull();
-        assertThat(buildMockEmptyLocalResponse.city()).isNull();
+        assertThat(buildMockEmptyLocalResponse.getName()).isNull();
+        assertThat(buildMockEmptyLocalResponse.getAddress()).isNull();
+        assertThat(buildMockEmptyLocalResponse.getType()).isNull();
+        assertThat(buildMockEmptyLocalResponse.getState()).isNull();
+        assertThat(buildMockEmptyLocalResponse.getCity()).isNull();
     }
 }

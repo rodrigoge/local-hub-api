@@ -1,7 +1,5 @@
 package br.com.api.localhub.infra.persistence;
 
-import br.com.api.localhub.core.entities.LocalTypeEnum;
-import br.com.api.localhub.core.entities.StateEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +11,8 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.openapitools.model.LocalTypeEnum;
+import org.openapitools.model.StateEnum;
 
 import java.util.UUID;
 

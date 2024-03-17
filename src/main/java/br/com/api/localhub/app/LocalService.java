@@ -1,10 +1,10 @@
 package br.com.api.localhub.app;
 
-import br.com.api.localhub.core.entities.LocalRequest;
-import br.com.api.localhub.core.entities.LocalResponse;
 import br.com.api.localhub.core.usecases.LocalUseCase;
 import br.com.api.localhub.infra.gateways.LocalRepositoryGateway;
 import lombok.extern.log4j.Log4j2;
+import org.openapitools.model.LocalRequest;
+import org.openapitools.model.LocalResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

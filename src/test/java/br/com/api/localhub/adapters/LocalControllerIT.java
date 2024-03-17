@@ -1,25 +1,26 @@
 package br.com.api.localhub.adapters;
 
+import br.com.api.localhub.adapters.controllers.LocalController;
 import br.com.api.localhub.app.LocalService;
-import br.com.api.localhub.core.entities.LocalRequest;
 import br.com.api.localhub.mocks.MockBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openapitools.model.LocalRequest;
+import org.openapitools.model.LocalTypeEnum;
+import org.openapitools.model.OrderEnum;
+import org.openapitools.model.StateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -33,23 +34,31 @@ public class LocalControllerIT {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private LocalController localController;
+
     @Test
-    void should_GetLocations_When_ValidInput() throws Exception {
+    void should_GetLocations_When_ValidInput() {
         var mockLocalResponses = MockBuilder.buildMockLocalResponses();
         when(localService.getLocals(any(LocalRequest.class))).thenReturn(mockLocalResponses);
-        var mockLocalRequest = MockBuilder.buildMockLocalRequestByAscending();
-        mockMvc.perform(get("/locals")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .param("name", "Company Name S.A")
-                        .param("city", "123 Main Street, Cityville")
-                        .param("page", "0")
-                        .param("limit", "25")
-                        .param("column", "id")
-                        .param("order", "DESC"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[0].name").value(mockLocalRequest.name()))
-                .andExpect(jsonPath("$[0].city").value(mockLocalRequest.city()));
+        var localResponses = localController.getLocals(
+                0,
+                25,
+                "id",
+                OrderEnum.ASC,
+                "Company Name S.A",
+                "123 Main Street, Cityville",
+                LocalTypeEnum.FOOD,
+                StateEnum.MINAS_GERAIS,
+                "Belo Horizonte"
+        );
+        assertNotNull(localResponses);
+        assertNotNull(localResponses.getBody());
+        assertEquals(mockLocalResponses.size(), localResponses.getBody().size());
+        assertEquals(mockLocalResponses.getFirst().getName(), localResponses.getBody().getFirst().getName());
+        assertEquals(mockLocalResponses.getFirst().getAddress(), localResponses.getBody().getFirst().getAddress());
+        assertEquals(mockLocalResponses.getFirst().getType(), localResponses.getBody().getFirst().getType());
+        assertEquals(mockLocalResponses.getFirst().getState(), localResponses.getBody().getFirst().getState());
+        assertEquals(mockLocalResponses.getFirst().getCity(), localResponses.getBody().getFirst().getCity());
     }
 }

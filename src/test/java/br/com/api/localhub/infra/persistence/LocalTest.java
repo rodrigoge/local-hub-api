@@ -1,11 +1,11 @@
 package br.com.api.localhub.infra.persistence;
 
-import br.com.api.localhub.core.entities.LocalTypeEnum;
-import br.com.api.localhub.core.entities.StateEnum;
 import br.com.api.localhub.mocks.MockBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openapitools.model.LocalTypeEnum;
+import org.openapitools.model.StateEnum;
 
 import java.util.UUID;
 

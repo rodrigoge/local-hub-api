@@ -1,7 +1,7 @@
 package br.com.api.localhub.adapters.gateways;
 
-import br.com.api.localhub.core.entities.LocalRequest;
-import br.com.api.localhub.core.entities.LocalResponse;
+import org.openapitools.model.LocalRequest;
+import org.openapitools.model.LocalResponse;
 
 import java.util.List;
 

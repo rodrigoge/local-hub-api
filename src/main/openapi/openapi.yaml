@@ -1,0 +1,199 @@
+openapi: 3.0.1
+info:
+  title: Local Hub API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /locals:
+    get:
+      tags:
+        - Outbound
+      summary: Get the list of all locals services
+      operationId: getLocals
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Column'
+        - $ref: '#/components/parameters/Order'
+        - $ref: '#/components/parameters/Name'
+        - $ref: '#/components/parameters/Address'
+        - $ref: '#/components/parameters/Type'
+        - $ref: '#/components/parameters/State'
+        - $ref: '#/components/parameters/City'
+      responses:
+        '200':
+          description: Sucessfully to get locals response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocalResponses'
+        '400':
+          description: Bad request. Any parameter is invalid.
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '500':
+          description: Unexpected error.
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/Page'
+    Limit:
+      name: limit
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/Limit'
+    Column:
+      name: column
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/Column'
+    Order:
+      name: order
+      in: query
+      required: true
+      schema:
+        $ref: '#/components/schemas/OrderEnum'
+    Name:
+      name: name
+      in: query
+      schema:
+        $ref: '#/components/schemas/Name'
+    Address:
+      name: address
+      in: query
+      schema:
+        $ref: '#/components/schemas/Address'
+    Type:
+      name: LocalTypeEnum
+      in: query
+      schema:
+        $ref: '#/components/schemas/LocalTypeEnum'
+    State:
+      name: state
+      in: query
+      schema:
+        $ref: '#/components/schemas/StateEnum'
+    City:
+      name: city
+      in: query
+      schema:
+        $ref: '#/components/schemas/City'
+  schemas:
+    Name:
+      type: string
+      description: Name of a local
+      example: Company Name S.A
+    Address:
+      type: string
+      description: Address of a local
+      example: 123 Main Street, Cityville
+    LocalTypeEnum:
+      enum:
+        - FOOD
+        - HOSPITAL
+        - GAS_STATION
+        - STORE
+      description: Types of locals
+      example: FOOD
+    StateEnum:
+      enum:
+        - ACRE
+        - ALAGOAS
+        - AMAPA
+        - AMAZONAS
+        - BAHIA
+        - CEARA
+        - DISTRITO_FEDERAL
+        - ESPIRITO_SANTO
+        - GOIAS
+        - MARANHAO
+        - MATO_GROSSO
+        - MATO_GROSSO_DO_SUL
+        - MINAS_GERAIS
+        - PARA
+        - PARAIBA
+        - PARANA
+        - PERNAMBUCO
+        - PIAUI
+        - RIO_DE_JANEIRO
+        - RIO_GRANDE_DO_NORTE
+        - RIO_GRANDE_DO_SUL
+        - RONDONIA
+        - RORAIMA
+        - SANTA_CATARINA
+        - SAO_PAULO
+        - SERGIPE
+        - TOCANTINS
+      description: Brazilian States of locals
+      example: MINAS_GERAIS
+    City:
+      type: string
+      description: Brazilian cities of locals
+      example: Belo Horizonte
+    Page:
+      type: integer
+      format: int32
+      description: Number of page
+      example: 0
+    Limit:
+      type: integer
+      format: int32
+      description: Limit of locals per page
+      example: 25
+    Column:
+      type: string
+      description: Column name of locals by ordering
+      example: id
+    OrderEnum:
+      enum:
+        - ASC
+        - DESC
+      description: Order type of locals
+      example: ASC
+    LocalRequest:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        address:
+          $ref: '#/components/schemas/Address'
+        type:
+          $ref: '#/components/schemas/LocalTypeEnum'
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        city:
+          $ref: '#/components/schemas/City'
+        page:
+          $ref: '#/components/schemas/Page'
+        limit:
+          $ref: '#/components/schemas/Limit'
+        column:
+          $ref: '#/components/schemas/Column'
+        order:
+          $ref: '#/components/schemas/OrderEnum'
+    LocalResponse:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        address:
+          $ref: '#/components/schemas/Address'
+        type:
+          $ref: '#/components/schemas/LocalTypeEnum'
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        city:
+          $ref: '#/components/schemas/City'
+    LocalResponses:
+      type: array
+      items:
+        $ref: '#/components/schemas/LocalResponse'

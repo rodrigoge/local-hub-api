@@ -1,13 +1,13 @@
 package br.com.api.localhub.mocks;
 
-import br.com.api.localhub.core.entities.LocalRequest;
-import br.com.api.localhub.core.entities.LocalResponse;
-import br.com.api.localhub.core.entities.LocalTypeEnum;
-import br.com.api.localhub.core.entities.OrderEnum;
-import br.com.api.localhub.core.entities.StateEnum;
 import br.com.api.localhub.core.exceptions.FlowException;
 import br.com.api.localhub.infra.gateways.LocalRepositoryGateway;
 import br.com.api.localhub.infra.persistence.Local;
+import org.openapitools.model.LocalRequest;
+import org.openapitools.model.LocalResponse;
+import org.openapitools.model.LocalTypeEnum;
+import org.openapitools.model.OrderEnum;
+import org.openapitools.model.StateEnum;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
